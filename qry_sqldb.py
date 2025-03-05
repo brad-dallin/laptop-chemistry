@@ -97,14 +97,14 @@ if __name__ == "__main__":
         description="Retreive data from ChEMBL data and save to a CSV file",
     )
     parser.add_argument(
-        "-i", "--input",
+        "input",
         action="store",
         type=str,
         required=True,
         help="Text file containing SQL query",
     )
     parser.add_argument(
-        "-o", "--output",
+        "output",
         action="store",
         type=str,
         required=True,
