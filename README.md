@@ -1,2 +1,2 @@
-# cadd_py
-Repository of personal Computer-Aided Drug Design projects.
+# cheminfo
+Repository of personal cheminformatics projects.
