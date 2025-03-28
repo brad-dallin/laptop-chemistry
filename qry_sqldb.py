@@ -30,12 +30,50 @@ Author: Brad Dallin
 Date: March 4, 2025
 """
 
-# Import modules
+
+########################################################################
+## Imports
+########################################################################
 import sys
 import argparse
 import pandas as pd
 import adbc_driver_postgresql.dbapi
 from dotenv import dotenv_values
+
+
+########################################################################
+## Functions
+########################################################################
+def parse_args(argv):
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(
+        prog="qry_sqldb.py",
+        description="Retreive data from ChEMBL PostgreSQL and save to a CSV file",
+    )
+    parser.add_argument(
+        "input",
+        action="store",
+        type=str,
+        required=True,
+        help="Text file containing SQL query",
+    )
+    parser.add_argument(
+        "output",
+        action="store",
+        type=str,
+        required=True,
+        help="CSV file with queried data",
+    )
+    parser.add_argument(
+        "--env_path",
+        action="store",
+        type=str,
+        default=".env",
+        required=False,
+        help="Path to .env file"
+    )
+    args = parser.parse_args(argv)
+    return args
 
 
 # Read query
@@ -78,8 +116,9 @@ def sql_query(
 
 
 # Main function
-def main(args):
+def main(argv):
     """Main function"""
+    args = parse_args(argv)
     sql = read_query(args.input)
     df = sql_query(sql, args.env_path)
     # Save to file
@@ -91,31 +130,8 @@ def main(args):
     return 0
 
 
+########################################################################
+## Run
+########################################################################
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        prog="qry_sqldb.py",
-        description="Retreive data from ChEMBL data and save to a CSV file",
-    )
-    parser.add_argument(
-        "input",
-        action="store",
-        type=str,
-        required=True,
-        help="Text file containing SQL query",
-    )
-    parser.add_argument(
-        "output",
-        action="store",
-        type=str,
-        required=True,
-        help="CSV file with queried data",
-    )
-    parser.add_argument(
-        "--env_path",
-        action="store",
-        type=str,
-        default=".env",
-        required=False,
-        help="Path to .env file"
-    )
-    main(parser.parse_args())
+    main(sys.argv[1:])
