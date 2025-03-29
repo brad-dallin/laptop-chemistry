@@ -5,8 +5,8 @@
 qry_sqldb.py
 
 This script connects to a PostgreSQL database, executes a SQL query
-to retrieve bioactivity data in the ChEMBL database, and saves the
-resulting data to a CSV file.
+to retrieve  data in the ChEMBL database, and saves the resulting
+data to a CSV file.
 
 Input:
 - SQL query as a text file
@@ -23,7 +23,7 @@ Dependencies:
 
 Usage:
 - Ensure that the .env file contains the correct database URI
-  under the key 'CHEMBL_LOCAL_URI'
+  under the key 'DB_URI'
 - Run the script using Python 3.
 
 Author: Brad Dallin
@@ -44,7 +44,7 @@ from dotenv import dotenv_values
 ########################################################################
 ## Functions
 ########################################################################
-def parse_args(argv):
+def parse_args(argv) -> argparse.Namespace:
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(
         prog="qry_sqldb.py",
@@ -54,14 +54,12 @@ def parse_args(argv):
         "input",
         action="store",
         type=str,
-        required=True,
         help="Text file containing SQL query",
     )
     parser.add_argument(
         "output",
         action="store",
         type=str,
-        required=True,
         help="CSV file with queried data",
     )
     parser.add_argument(
@@ -94,7 +92,7 @@ def sql_query(
     config = dotenv_values(env_path)
     # Test connection
     try:
-        uri = config["CHEMBL_LOCAL_URI"]
+        uri = config["DB_URI"]
         conn = adbc_driver_postgresql.dbapi.connect(uri)
         with conn.cursor() as cur:
             cur.execute("SELECT 1")
