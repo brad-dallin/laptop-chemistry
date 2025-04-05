@@ -77,8 +77,7 @@ def parse_args(argv) -> argparse.Namespace:
 # Read query
 def read_query(file_path: str) -> str:
     """Read and store SQL query from text file"""
-    with open(file_path, "r",
-              encoding="utf-8") as txt_file:
+    with open(file_path, "r", encoding="utf-8") as txt_file:
         txt = txt_file.read()
     return txt
 
