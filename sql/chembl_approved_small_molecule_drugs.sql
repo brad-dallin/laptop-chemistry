@@ -1,4 +1,4 @@
-SELECT DISTINCT m.chembl_id AS molecule_chembl_id,
+SELECT DISTINCT m.chembl_id AS chembl_molecule_id,
 s.canonical_smiles AS smiles,
 -- Molecule Dictionary
 m.molregno, m.pref_name, m.max_phase, m.therapeutic_flag, m.dosed_ingredient,
