@@ -44,7 +44,7 @@ from dotenv import dotenv_values
 ########################################################################
 ## Functions
 ########################################################################
-def parse_args(argv) -> argparse.Namespace:
+def parse_args(argv: list) -> argparse.Namespace:
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(
         prog="qry_sqldb.py",
@@ -86,7 +86,7 @@ def read_query(file_path: str) -> str:
 def sql_query(
         qry: str,
         env_path: str = ".env"
-        ) -> pd.DataFrame:
+    ) -> pd.DataFrame:
     """Run SQL query and return as Pandas DataFrame"""
     config = dotenv_values(env_path)
     # Test connection
