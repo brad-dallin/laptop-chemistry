@@ -44,7 +44,7 @@ from dotenv import dotenv_values
 ########################################################################
 ## Functions
 ########################################################################
-def parse_args(argv: list) -> argparse.Namespace:
+def parse_args(argv: list[str]) -> argparse.Namespace:
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(
         prog="qry_sqldb.py",
@@ -89,6 +89,12 @@ def sql_query(
     ) -> pd.DataFrame:
     """Run SQL query and return as Pandas DataFrame"""
     config = dotenv_values(env_path)
+    
+    # Check if DB_URI exists in config
+    if "DB_URI" not in config:
+        print("Error: DB_URI not found in environment file")
+        sys.exit(1)
+        
     # Test connection
     try:
         uri = config["DB_URI"]
@@ -102,29 +108,37 @@ def sql_query(
         sys.exit(1)
 
     # Run input qry
-    with conn.cursor() as cur:
-        cur.execute(qry)
-        df = pd.DataFrame(
-            cur.fetchall(),
-            columns=[desc[0] for desc in cur.description]
-        )
-    print(f"{df.shape[0]} molecules found!\n")
-    return df
+    try:
+        with conn.cursor() as cur:
+            cur.execute(qry)
+            df = pd.DataFrame(
+                cur.fetchall(),
+                columns=[desc[0] for desc in cur.description]
+            )
+        print(f"{df.shape[0]} rows found!\n")
+        return df
+    except Exception as err:
+        print(f"Error executing query: {err}\n")
+        sys.exit(1)
 
 
 # Main function
-def main(argv):
+def main(argv: list[str]) -> int:
     """Main function"""
-    args = parse_args(argv)
-    sql = read_query(args.input)
-    df = sql_query(sql, args.env_path)
-    # Save to file
-    df.to_csv(
-        args.output,
-        index=False,
-        encoding="utf-8"
-    )
-    return 0
+    try:
+        args = parse_args(argv)
+        sql = read_query(args.input)
+        df = sql_query(sql, args.env_path)
+        # Save to file
+        df.to_csv(
+            args.output,
+            index=False,
+            encoding="utf-8"
+        )
+        return 0
+    except Exception as err:
+        print(f"Error: {err}")
+        return 1
 
 
 ########################################################################
