@@ -79,13 +79,13 @@ def load_smiles(smi: str) -> rdkit.Chem.rdchem.Mol:
             )
             assert mol is not None
         except Exception as e:
-            print(f"Error processing SMILES at index {ii}: {smi}")
+            print(f"Error processing SMILES: {smi}")
             print(f"Exception: {e}")
     return mol
 
 
 # Sanitize molecule
-def sanitize_molecule(mol: rdkit.Chem.rdchem.Mol) -> rdkit.Chem.rdchem.Mol:
+def sanitize_molecule(mol: rdkit.Chem.rdchem.Mol) -> bool:
     """Sanitize molecules with RDKit, keep largest fragment, and uncharge"""
     try:
         rdkit.Chem.SanitizeMol(mol)
@@ -104,7 +104,7 @@ def sanitize_molecule(mol: rdkit.Chem.rdchem.Mol) -> rdkit.Chem.rdchem.Mol:
 def calculate_descriptors(
         mol: rdkit.Chem.rdchem.Mol,
         descriptors: List[str] = ["all"]
-    ) -> Dict[str, any]:
+    ) -> Dict[str, float]:
     """Calculate RDKit descriptors"""
     rd_descriptors = {
         "SMILES": rdkit.Chem.MolToSmiles(mol),
@@ -124,7 +124,7 @@ def process_molecules(
         df: pd.DataFrame,
         smiles_column: str = "smiles",
         descriptors: List[str] = ["all"]
-    ) -> tuple:
+    ) -> Tuple[List[Dict[str, float]], List[int]]:
     """Preprocess molecules with RDKit by checking compatibility"""
     mols = []
     unique_smiles = []
@@ -155,7 +155,7 @@ def process_molecules(
 
 
 # Main function
-def main(argv: List[str]):
+def main(argv: List[str]) -> int:
     """Main function"""
     args = parse_args(argv)
     args.descriptors = [dd.strip() for dd in args.descriptors.split(",")]
