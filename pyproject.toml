@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cheminformatics"
+version = "0.1.0"
+description = "Tools for cheminformatics analysis and visualization"
+authors = [{name = "Brad Dallin", email = "laptopchemistry@gmail.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "rdkit>=2023.3.1",
+    "pandas>=2.0.0",
+    "pillow>=9.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/brad-dallin/cheminformatics"
+"Bug Tracker" = "https://github.com/brad-dallin/cheminformatics/issues"
