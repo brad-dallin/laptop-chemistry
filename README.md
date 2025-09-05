@@ -1,2 +1,2 @@
-# cheminformatics
-Repository to store notebooks and other useful tools for cheminformatics analysis and visualization.
+# Laptop Chemistry
+Repository to store notebooks and other useful tools for computational chemistry analysis and visualization.
