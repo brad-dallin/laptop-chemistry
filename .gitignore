@@ -27,8 +27,8 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+# Usually these files are written by a python script from a template
+# before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
 
@@ -83,36 +83,36 @@ profile_default/
 ipython_config.py
 
 # pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
+# For a library or package, you might want to ignore these files since the code is
+# intended to run in multiple environments; otherwise, check them in:
 # .python-version
 
 # pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
+# According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+# However, in case of collaboration, if having platform-specific dependencies or dependencies
+# having no cross-platform support, pipenv may install dependencies that don't work, or not
+# install all needed dependencies.
 #Pipfile.lock
 
 # UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
+# Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
+# This is especially recommended for binary packages to ensure reproducibility, and is more
+# commonly ignored for libraries.
 #uv.lock
 
 # poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+# Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+# This is especially recommended for binary packages to ensure reproducibility, and is more
+# commonly ignored for libraries.
+# https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 
 # pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+# Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-#   in version control.
-#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
+# pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+# in version control.
+# https://pdm.fming.dev/latest/usage/project/#working-with-version-control
 .pdm.toml
 .pdm-python
 .pdm-build/
@@ -161,10 +161,10 @@ dmypy.json
 cython_debug/
 
 # PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+# JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+# be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+# and can be added to the global gitignore or merged into this file. For a more nuclear
+# option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
 # PyPI configuration file
@@ -172,3 +172,161 @@ cython_debug/
 
 # VS Code
 .vscode/
+
+# ============================================================================
+# SECURITY AND SENSITIVE DATA ADDITIONS
+# ============================================================================
+
+# Environment variables and configuration files
+*.env
+*.env.*
+.env.local
+.env.*.local
+.envrc
+config.ini
+config.json
+secrets.json
+secrets.yaml
+secrets.yml
+
+# AWS credentials and configuration
+.aws/
+aws-exports.js
+
+# Google Cloud credentials
+gcloud/
+*.json  # Be careful with this - you may need to whitelist specific JSON files
+service-account*.json
+*-service-account*.json
+google-services.json
+google-cloud-keyfile.json
+
+# Azure credentials
+.azure/
+
+# SSH keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+id_dsa*
+id_ed25519*
+
+# Database files and backups
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
+dump.sql
+*.dump
+*.backup
+
+# API keys and tokens
+api_keys.txt
+tokens.txt
+*_token
+*_key
+*_secret
+*_password
+
+# Security scan results
+.snyk
+bandit-report.*
+safety-report.*
+
+# ============================================================================
+# ADDITIONAL DEVELOPMENT TOOLS AND TEMPORARY FILES
+# ============================================================================
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.atom/
+.brackets.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs and debugging
+*.log
+logs/
+log/
+*.log.*
+debug.log
+error.log
+
+# Cache directories (additional to existing .cache)
+.npm/
+.yarn/
+node_modules/  # In case you use Node.js tools
+.parcel-cache/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# Kubernetes
+*.kubeconfig
+kube-config
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfvars
+*.auto.tfvars
+
+# Vagrant
+.vagrant/
+
+# ============================================================================
+# PROJECT-SPECIFIC PATTERNS (CUSTOMIZE AS NEEDED)
+# ============================================================================
+
+# Data files (uncomment if you don't want to track data)
+# data/
+# *.csv
+# *.xml
+# *.xlsx
+# *.xls
+
+# Model files (uncomment if models are too large for git)
+# models/
+# *.pkl
+# *.model
+# *.h5
+# *.pt
+# *.pth
+# *.onnx
+
+# Output directories
+output/
+outputs/
+results/
+artifacts/
+
+# Local development files
+local/
+tmp/
+temp/
