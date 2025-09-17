@@ -1,16 +1,12 @@
 """Utility functions for notebooks."""
 
-from io import BytesIO
-from PIL import Image
-
 import rdkit
 from rdkit.Chem import Draw
-from PIL import Image
-from io import BytesIO
 
-
+# Draw molecule ACS1996 function
 def draw_molecule_acs1996(
     mol: rdkit.Chem.rdchem.Mol,
+    draw_mode: str = "svg",
     legend: str = "",
     width: int = -1,
     height: int = -1,
@@ -57,7 +53,9 @@ def draw_molecule_acs1996(
     rdkit.Chem.rdDepictor.StraightenDepiction(mol)
 
     # Create drawer with specified dimensions
-    d2d = Draw.MolDraw2DCairo(width, height)
+    d2d = Draw.MolDraw2DSVG(width, height)
+    if draw_mode.lower() == "cairo":
+        d2d = Draw.MolDraw2DCairo(width, height)
     
     # Set up atom highlighting
     highlight_atom_map = {}
@@ -83,7 +81,4 @@ def draw_molecule_acs1996(
         highlightBondColors=highlight_bond_map
     )
     d2d.FinishDrawing()
-    
-    # Convert to PIL Image
-    bio = BytesIO(d2d.GetDrawingText())
-    return Image.open(bio)
+    return d2d
