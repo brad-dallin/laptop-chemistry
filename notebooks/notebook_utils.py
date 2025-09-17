@@ -6,7 +6,6 @@ from rdkit.Chem import Draw
 # Draw molecule ACS1996 function
 def draw_molecule_acs1996(
     mol: rdkit.Chem.rdchem.Mol,
-    draw_mode: str = "svg",
     legend: str = "",
     width: int = -1,
     height: int = -1,
@@ -16,7 +15,7 @@ def draw_molecule_acs1996(
     highlight_bonds: list = None,
     highlight_bond_colors: dict = None,
     highlight_bond_color: tuple = (1, 0.5, 0.5)  # Default bond highlight color
-) -> Image.Image:
+): #-> Image.Image:
     """
     Draw molecule in ACS1996 format and return as PIL Image.
 
@@ -56,7 +55,7 @@ def draw_molecule_acs1996(
     d2d = Draw.MolDraw2DSVG(width, height)
     if draw_mode.lower() == "cairo":
         d2d = Draw.MolDraw2DCairo(width, height)
-    
+
     # Set up atom highlighting
     highlight_atom_map = {}
     if highlight_atoms and not highlight_atom_colors:
@@ -81,4 +80,6 @@ def draw_molecule_acs1996(
         highlightBondColors=highlight_bond_map
     )
     d2d.FinishDrawing()
-    return d2d
+
+    # Return drawing text
+    return d2d.GetDrawingText()
