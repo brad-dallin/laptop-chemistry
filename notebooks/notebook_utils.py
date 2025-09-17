@@ -80,7 +80,8 @@ def draw_molecule_acs1996(
         highlightAtoms=highlight_atoms or [],
         highlightAtomColors=highlight_atom_map,
         highlightBonds=highlight_bonds or [],
-        highlightBondColors=highlight_bond_map)
+        highlightBondColors=highlight_bond_map
+    )
     d2d.FinishDrawing()
     
     # Convert to PIL Image
