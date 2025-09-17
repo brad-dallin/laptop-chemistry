@@ -55,7 +55,7 @@ def draw_molecule_acs1996(
     # Compute 2D coordinates
     rdkit.Chem.rdDepictor.Compute2DCoords(mol)
     rdkit.Chem.rdDepictor.StraightenDepiction(mol)
-    
+
     # Create drawer with specified dimensions
     d2d = Draw.MolDraw2DCairo(width, height)
     
@@ -74,11 +74,13 @@ def draw_molecule_acs1996(
         highlight_bond_map = highlight_bond_colors
     
     # Draw the molecule with highlighting
-    Draw.DrawMoleculeACS1996(d2d, mol, legend=legend, 
-                            highlightAtoms=highlight_atoms or [],
-                            highlightAtomColors=highlight_atom_map,
-                            highlightBonds=highlight_bonds or [],
-                            highlightBondColors=highlight_bond_map)
+    Draw.DrawMoleculeACS1996(
+        d2d, mol,
+        legend=legend, 
+        highlightAtoms=highlight_atoms or [],
+        highlightAtomColors=highlight_atom_map,
+        highlightBonds=highlight_bonds or [],
+        highlightBondColors=highlight_bond_map)
     d2d.FinishDrawing()
     
     # Convert to PIL Image
