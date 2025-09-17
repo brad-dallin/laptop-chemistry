@@ -15,7 +15,7 @@ def draw_molecule_acs1996(
     highlight_bonds: list = None,
     highlight_bond_colors: dict = None,
     highlight_bond_color: tuple = (1, 0.5, 0.5)  # Default bond highlight color
-): #-> Image.Image:
+) -> rdkit.Chem.Draw.rdMolDraw2D.MolDraw2DSVG:
     """
     Draw molecule in ACS1996 format and return as PIL Image.
 
@@ -53,8 +53,6 @@ def draw_molecule_acs1996(
 
     # Create drawer with specified dimensions
     d2d = Draw.MolDraw2DSVG(width, height)
-    if draw_mode.lower() == "cairo":
-        d2d = Draw.MolDraw2DCairo(width, height)
 
     # Set up atom highlighting
     highlight_atom_map = {}
